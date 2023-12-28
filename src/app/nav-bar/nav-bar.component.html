@@ -1,0 +1,85 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top" data-bs-theme="dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/">HousingApp</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" [routerLinkActiveOptions]="{exact:true}" routerLinkActive="active" aria-current="page" routerLink="/">Buy</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"  routerLinkActive="active" routerLink="/Rent-property">Rent</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"  routerLinkActive="active" routerLink="/add-property">List Property(free)</a>
+        </li>
+       
+       
+      </ul>
+     <div>
+
+
+
+
+      
+      <ul class="nav navbar-nav">
+        <li *ngIf="!loggedIn()" class="nav-item">
+         <a class="nav-link" routerLinkActive="active" routerLink="/User/Register">Register</a>
+        </li>
+        <!-- <li  class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="/User/signup">SignUp</a>
+         </li> -->
+        <li *ngIf="!loggedIn()" class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="/User/LogIn">LogIn</a>
+         </li>
+         <!-- <li *ngIf="loogedin()" class="nav-item">
+          <a class="nav-link" (click)="onlogout()">LogOut</a>
+         </li> -->
+
+       
+
+         <!-- <div *ngIf="loggedIn()" class="dropdown m-2" dropdown>
+            <a href="#" class="dropdown-toggle text-light" dropdownToggle (click)="false"
+               aria-controls="basic-link-dropdown">Welcome {{loggedInUser}}</a>
+               <div class="dropdown-menu" *dropdownMenu>
+                <a href="#" class="dropdown-item">
+                 <i class="fas fa-tachometer-alt"></i>View dashboard
+                </a>
+                <a href="#" class="dropdown-item">
+                  <i class="fas fa-user-circle"></i>my profile
+                 </a>
+                 <a href="#" class="dropdown-item">
+                  <i class="fas fa-key"></i>change password
+                 </a>
+                 <a href="#" (click)="onlogout()" class="dropdown-item">
+                  <i class="fas fa-sign-out-alt"></i>LogOut
+                 </a>
+               
+               </div>
+            
+          
+
+         </div> -->
+      
+      </ul>
+
+
+  
+      <div class="btn-group"  *ngIf="loggedIn()">
+        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+          Welcome {{loggedInUser}}
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><button class="dropdown-item" type="button">View dashboard</button></li>
+          <li><button class="dropdown-item" type="button">my Profile</button></li>
+          <li><button class="dropdown-item" type="button">change password</button></li>
+          <li><button class="dropdown-item" type="button" (click)="onlogout()"> LogOut</button></li>
+        </ul>
+      </div>
+      
+     </div>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,157 @@
+<!-- <p>
+  property-details works!
+
+  {{propertyId}}
+  <button (click)="onselectNext()" class="btn btn-primary">select Next page</button>
+  <br/>
+  <button [routerLink]="['/property-details','1']"  class="btn btn-primary">1</button>
+  <button [routerLink]="['/property-details','2']" class="btn btn-primary">2</button>
+  <button [routerLink]="['/property-details','3']" class="btn btn-primary">3</button>
+  <button [routerLink]="['/property-details','4']" class="btn btn-primary">4</button>
+  <button [routerLink]="['/property-details',{propertyId}]" class="btn btn-primary">4</button>
+
+</p> -->
+
+
+<div class="row shadow">
+  <div class="col-sm-4 p-0">
+    <div class="card">
+      <div class="card-img-wrapper">
+        <img class="card-img-top" src="assets/images/prop-1.png">
+        <!-- <img *ngIf="mainPhotoUrl" class="card-img-top" src="{{mainPhotoUrl}}">
+        <img *ngIf="!mainPhotoUrl" class="card-img-top" src="assets/images/house_default.png"> -->
+      </div>
+      <div class="card-body">
+        <h1 class="card-title">{{property.Name}}</h1>
+        <div>
+            <strong>{{property.BHK}} BHK {{property.PType}}  ${{property.Price}}</strong>
+        </div>
+        <div>
+           <strong>in {{property.City}}</strong>
+        </div> <hr>
+        <div>
+            <strong>Build Area: </strong>
+            {{property.BuiltArea}} Sqft
+        </div>
+
+        <div>
+            <strong>Carpet Area: </strong>
+            {{property.carpetArea}} Sqft
+        </div>
+        <div>
+            <strong>Furnishing Type: </strong>
+            {{property.FType}}
+        </div>
+        <div>
+            <strong>Available for: </strong>
+            <span *ngIf="property.SellRent == 1">Purchase</span>
+            <span *ngIf="property.SellRent == 2">Rent</span>
+        </div>
+
+    </div>
+      <div class="card-footer">
+        <div class="btn-group d-flex">
+          <button class="btn btn-primary">Like</button>
+          <button class="btn btn-success">Message</button>
+        </div>
+      </div>
+  </div>
+  </div>
+  <div class="col-sm-8 p-0">
+    <div class="tab-panel p-3">
+      <mat-tab-group class="member-tabset">
+        <mat-tab label="Overview">
+          <h1>Overview</h1>
+          <div class="row">
+              <div class="col-sm-6">
+                  <div class="heading">
+                      <strong>Project Name</strong>
+                      <p>{{property.Name}}</p>
+                  </div>
+
+                  <div class="heading">
+                      <strong>Floor Number</strong>
+                      <p>{{property.FloorNo}} of {{property.TotalFloors}}</p>
+                  </div>
+
+                  <div class="heading">
+                      <strong>Age of Property</strong>
+                      <p>{{property.AOP}}</p>
+                  </div>
+
+                  <div class="heading">
+                      <strong>Posession</strong>
+                      <p>{{property.estPossessionOn | date}}</p>
+                  </div>
+              </div>
+
+              <div class="col-sm-6">
+                  <div class="heading">
+                      <strong>Main Entrance</strong>
+                      <p>{{property.maintenance}}</p>
+                  </div>
+
+                  <div class="heading">
+                      <strong>Gated Community</strong>
+                      <p *ngIf="property.Gated">Yes</p>
+                      <p *ngIf="!property.Gated">No</p>
+                  </div>
+
+                  <div class="heading">
+                      <strong>Security Deposit</strong>
+                      <p>{{property.Security}}</p>
+                  </div>
+                  <div class="heading">
+                      <strong>Maintenance</strong>
+                      <p>{{property.maintenance}}</p>
+                  </div>
+              </div>
+              <div class="col-sm-12">
+                  <div class="heading">
+                      <strong>About Property</strong>
+                      <p>{{property.description}}</p>
+                  </div>
+              </div>
+            </div>
+        </mat-tab>
+        <mat-tab label="Address">
+          <div class="col-sm-12">
+            <h1>Address</h1>
+            <div class="heading">
+                <strong>{{property.address}}</strong><br/>
+                <strong>{{property.address2}}</strong><br/>
+                <strong>{{property.City}}</strong>
+            </div>
+        </div>
+
+        </mat-tab>
+        <!-- <mat-tab label="Photos">
+          <c-carousel>
+            <c-carousel-indicators></c-carousel-indicators>
+            <c-carousel-inner>
+              <c-carousel-item *ngFor="let slide of slides">
+                <img
+                  [src]="slide.src"
+                  alt="{{ slide.title }}"
+                  class="d-block w-100"
+                  loading="lazy" />
+              </c-carousel-item>
+            </c-carousel-inner>
+            <c-carousel-control [routerLink] caption="Previous" direction="prev"></c-carousel-control>
+            <c-carousel-control [routerLink] caption="Next" direction="next"></c-carousel-control>
+          </c-carousel>
+
+                 </mat-tab> -->
+
+        <mat-tab label="Upload/Edit Photos">
+            <!-- <app-photo-editor [property]="property"
+            (mainPhotoChangedEvent)="changePrimaryPhoto($event)"></app-photo-editor> -->
+        </mat-tab>
+        <mat-tab label="Contact">
+          <h1>Contact Detail</h1>
+          This should be restricted area and only registered user should be able to see seller contact details
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+</div>

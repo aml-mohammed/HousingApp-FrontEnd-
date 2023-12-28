@@ -1,0 +1,33 @@
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+.ng-invalid.ng-touched{
+border-color: red;
+}
+.error-block{
+    color: red;
+}
+
+.mat-tab-group {
+    margin-bottom: 48px;
+  }
+
+  
+  .photo-control{
+    min-height: 300px;
+    vertical-align: middle;
+    text-align: center;
+    border: 1px dashed blue;
+    margin: 5px;
+  }
+  .btn-group > label[ng-reflect-btn-radio]{
+    border-radius: 40px;
+    padding: 0 15px;
+    line-height: 15px;
+  }
+
+
+
+  .mat-mdc-radio-button ~ .mat-mdc-radio-button {
+    margin-left: 16px;
+  }

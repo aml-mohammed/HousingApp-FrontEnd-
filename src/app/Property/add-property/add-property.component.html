@@ -1,0 +1,343 @@
+
+
+<div class="row">
+  <div class="col-8">
+<div class="card" >
+  <div class="card-header">
+    <h5 class="card-title text-bg-primary p-2">List Your Property</h5>
+  </div>
+  <div class="card-body">    
+    <form (ngSubmit)="onSubmit()" [formGroup]="addPropertyForm">
+      <div>
+    <mat-tab-group class="tab-panel" #formTabs>
+
+     
+      <mat-tab label="Basic Info" formGroupName="BasicInfo" >
+
+
+        <div class="form-group col-12" >
+          <p>I want to</p>
+       
+        <mat-radio-group  formControlName="SellRent" ngDefaultControl>
+          
+          <mat-radio-button id="sell" value="2">
+            sell
+          </mat-radio-button>
+          <mat-radio-button id="sell" value="1">
+            Rent
+          </mat-radio-button>
+          <div class="error-block" *ngIf="SellRent.invalid&&nextclicked">
+            Please select sell or rent
+          </div>
+
+        </mat-radio-group>
+      
+        
+          </div>
+        <br>
+
+        <div class="form-group col-12">
+         <p>BHK</p>
+          <mat-radio-group  formControlName="BHK" ngDefaultControl  [(ngModel)]="propertView.BHK">
+          
+            <mat-radio-button *ngFor="let bhk of [1,2,3,4,5]"  value={{bhk}}>
+              {{bhk}}
+            </mat-radio-button>
+           
+            <div class="error-block" *ngIf="BHK.invalid&&nextclicked">
+              Please select bhk value 
+            </div>
+  
+          </mat-radio-group>
+        
+          </div>
+
+
+<br>
+
+
+          <div class="form-group col-12">
+            <p>property Type</p>
+            <mat-radio-group  formControlName="PType" ngDefaultControl  [(ngModel)]="propertView.PType">
+            
+              <mat-radio-button *ngFor="let pt of propertyTypes"  value={{pt}}>
+                {{pt}}
+              </mat-radio-button>
+             
+              <div class="error-block" *ngIf="PType.invalid&&nextclicked">
+                Please select Property type value 
+              </div>
+    
+            </mat-radio-group>
+            </div>
+<br>
+            <div class="form-group col-12 "  formControlName="FType" ngDefaultControl>
+              <p>Furnture Type</p>
+            <mat-radio-group  formControlName="FType" ngDefaultControl  [(ngModel)]="propertView.FType">
+              <mat-radio-button *ngFor="let ft of FurnishTypes"  value={{ft}}>
+                {{ft}}
+              </mat-radio-button>
+             
+              <div class="error-block" *ngIf="FType.invalid&&nextclicked">
+                Please select furnture type value 
+              </div>
+    
+            </mat-radio-group>
+              </div>
+              <br>
+        <div class="form-group col-12">
+          <label for="Name" class="form-label">In Buliding/Socity/Project</label>
+          
+          <input type="text" class="form-control" ngDefaultControl   formControlName="Name"  #propNmae 
+          ngModel name="Name" minlength="5"
+           required [(ngModel)]="propertView.Name">
+           <div class="error-block"
+           *ngIf="Name.invalid && (nextclicked || Name.touched)">
+             Please select building, society or project name
+           </div>
+          <!-- <span *ngIf="!propNmae.valid && propNmae.touched" class="error-block">
+           <span *ngIf="propNmae.errors.required">please enter name</span> 
+           <span *ngIf="propNmae.errors?.minlength">name must be 5 characters at least</span>
+  
+           <span *ngIf="propNmae.errors?.['required']">Please provide  name</span>
+           <span *ngIf="propNmae.errors?.['minlength']">Name must be at least 5 characters long</span>
+          </span> -->
+          
+        </div>
+       
+        <div class="form-group col-12">
+          <label for="City" class="form-label">City</label>
+          <select type="text" class="form-control"   formControlName="City" ngDefaultControl
+          [(ngModel)]="propertView.City">
+          <option  value="">---select----</option>
+          <option *ngFor="let city of cityList" value="{{city.id}}">
+            {{city.name}}
+          </option>
+
+          </select>
+       
+          <div class="error-block"
+          *ngIf="City.invalid && (nextclicked || City.touched)">
+            Please select city
+          </div>
+        </div>
+
+
+        <button  type="button"
+         class="btn btn-primary col-12"  
+        
+        (click)="formTabs.selectedIndex=1"  (click)="selectTab(1,BasicInfo.valid)">Next</button>
+      
+      </mat-tab>
+
+
+      <mat-tab label="Pricing And Area" formGroupName="priceInfo" > 
+              <div class="form-group col-12">
+                <!-- <label *ngIf="SellRent.value==1">Price (in USD)</label>-->
+                <label>Price (in USD)</label> 
+              
+                <input type="text" class="form-control" formControlName="Price" ngDefaultControl>
+              
+                <!-- <div class="error-block" *ngIf="Price.invalid && (nextclicked || Price.touched)">
+                  Please select
+                  <span *ngIf="SellRent.value==1;else ShowRent">price</span>
+                  <ng-template #ShowRent>rent</ng-template>
+                   </div> -->
+                 </div>
+
+             <div *ngIf="SellRent.value==2">
+          <div class="form-group col-12">
+            <label>Security (in USD)</label>
+            <input type="text" formControlName="Security" ngDefaultControl class="form-control">
+             </div>
+  
+          <div class="form-group col-12">
+         <label>Maintenance (in USD)</label>
+          <input type="text" formControlName="Maintenance" ngDefaultControl class="form-control">
+           </div>
+                </div>
+           <div class="form-group col-12">
+                <label>Built Area (in Sqr Feet)</label>
+                <input type="text" class="form-control" formControlName="BuiltArea" ngDefaultControl>
+                <div class="error-block" *ngIf="BuiltArea.invalid && nextclicked">
+                  Please select built up area
+                </div>
+              </div>
+
+              <div class="form-group col-12">
+                <label>Carpet Area(in Sqr Feet)</label>
+                <input type="text" class="form-control" formControlName="CarpetArea" ngDefaultControl>
+              </div>
+
+              <div class="form-group col-12">
+                <button type="button" class="btn btn-primary col-12"
+                (click)="formTabs.selectedIndex=2">Next</button>
+                <br><br>
+                <button type="button" class="btn btn-primary col-12"
+                (click)="formTabs.selectedIndex=0">Back</button>
+              </div>
+      </mat-tab>
+
+
+
+
+
+
+      <!--Address Info-->
+      <mat-tab label="Address" formGroupName="AddressInfo"> 
+         <div class="form-group col-12">
+              <label>Floor</label>
+              <input type="text" class="form-control" formControlName="FloorNo" ngDefaultControl>
+            </div>
+
+            <div class="form-group col-12">
+              <label>Total Floor</label>
+              <input type="text" class="form-control" formControlName="TotalFloor" ngDefaultControl>
+            </div>
+
+            <div class="form-group col-12">
+              <label>Address</label>
+              <input type="text" class="form-control" ngDefaultControl  formControlName="Address">
+              <!-- <div class="error-block" *ngIf="Address.invalid && (nextclicked || Address.touched)">
+                Please select address
+              </div> -->
+            </div>
+<br>
+            <div class="form-group col-12">
+              <label>Landmark</label>
+              <input type="text" class="form-control"  formControlName="LandMark" ngDefaultControl>
+            </div>
+
+              <div class="form-group col-12">
+                <button type="button" class="btn btn-primary col-12" (click)="formTabs.selectedIndex=3">Next</button>
+<br><br>
+                <button type="button" class="btn btn-primary col-12" (click)="formTabs.selectedIndex=1">Back</button>
+              </div>
+      </mat-tab>
+
+
+      <!--Other Info Tab-->
+        <mat-tab label="Other Details" formGroupName="OtherInfo"> 
+            <div class="form-group col-12" formControlName="RTM" ngDefaultControl >
+              <label>Ready to Move</label><br/>
+              <input type="radio" id='Yes' value='1' 
+               name="RTM" formControlName="RTM" ngDefaultControl >
+              <label class="m-2">Yes</label>
+
+              <input type="radio" id="No" value='2'
+               name="RTM" formControlName="RTM"  ngDefaultControl>
+              <label class="m-2">No</label>
+              <div class="error-block" *ngIf="RTM.invalid && nextclicked">
+                Please select ready to move
+              </div>
+            </div>
+
+           
+
+            <div class="form-group col-3">
+              <label *ngIf="propertView.RTM">Establishment Date</label>
+              <label *ngIf="!propertView.RTM">Possession Date</label>
+              <label>Possession/Avaialble From</label>
+              <input type="date" class="form-control" formControlName="PossessionOn" ngDefaultControl>
+              
+            </div>
+
+
+
+
+            <!-- <div class="form-group col-12">
+              <label>Age of Property</label>
+              <input type="text" class="form-control">
+            </div> -->
+
+            <div class="form-group col-12">
+              <label>Gated Community</label>
+              
+
+                <mat-radio-group  formControlName="Gated" ngDefaultControl>
+          
+          <mat-radio-button value="yes">
+            Yes
+          </mat-radio-button>
+          <mat-radio-button  value="No">
+            No
+          </mat-radio-button>
+          <div class="error-block" *ngIf="SellRent.invalid&&nextclicked">
+            Please select sell or rent
+          </div>
+
+                </mat-radio-group>
+            </div>
+
+
+
+           
+            <div class="form-group col-12">
+              <label>Main Entrance</label>
+              
+              <mat-radio-group formControlName="MainEntrance" ngDefaultControl>
+            
+                <mat-radio-button *ngFor="let me of MainEntranceValues"  value={{me}}>
+                  {{me}}
+                </mat-radio-button>
+               
+                <div class="error-block" *ngIf="MainEntrance.invalid&&nextclicked">
+                  Please select Property main Enterance 
+                </div>
+      
+              </mat-radio-group>
+
+
+
+
+            </div>
+
+            <div class="form-group col-12">
+              <label>Description</label>
+              <textarea type="text" class="form-control" rows="6" formControlName="Description" ngDefaultControl></textarea>
+            </div>
+
+            <div class="form-group col-12">
+                <button type="button" class="btn btn-primary col-12"
+                 (click)="formTabs.selectedIndex=4">Next</button>
+<br><br>
+                <button type="button" class="btn btn-primary col-12" 
+                (click)="formTabs.selectedIndex=2">Back</button>
+             </div>
+        
+        </mat-tab>
+      <mat-tab label="Photos"> 
+         <div class="form-group col-12">
+              <div class="photo-control">
+                  <button class="mt-5" type="button">Upload</button> <br>
+                  This is under construction
+              </div>
+            </div>
+            <div class="form-group col-12">
+              <button type="button" class="btn btn-primary col-12"
+               (click)="formTabs.selectedIndex=3">Back</button>
+             <br><br>
+              <button type="reset" class="btn btn-primary col-12">Cancel</button>
+              <br><br>
+              <button type="submit" class="btn btn-primary col-12" >Save</button>
+
+         
+            </div> 
+         </mat-tab>
+    </mat-tab-group>
+    
+  </div>
+</form>
+</div>
+</div>
+</div>
+
+<div class="col-4">
+  <div class="card-header">
+  <h3>Your Property Preview</h3>
+  <div>
+    <app-property-card [Property]="propertView" HideIcons="true"> </app-property-card>
+  </div>
+</div>
+</div>
+</div>
